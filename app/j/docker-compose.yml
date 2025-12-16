@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  course-service:
+    build: .
+    container_name: service-course-soap
+    ports:
+      - "8001:8001"
+    environment:
+      - MONGODB_URI=mongodb+srv://gestion_db:tp13enforce@cluster0.3jswjuh.mongodb.net/?appName=Cluster0
+      - DATABASE_NAME=soa_databases
+      - COLLECTION_COURSES=courses
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8001
+    volumes:
+      - .:/app
+    restart: unless-stopped
+    networks:
+      - soa-network
+
+networks:
+  soa-network:
+    driver: bridge
